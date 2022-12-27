@@ -1,5 +1,5 @@
 import "./singUp.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./singUp.module.css";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,25 +14,33 @@ import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser, signIn } from "../../auth/firebase";
 import { useDispatch } from "react-redux";
+import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
 const SingUp = () => {
   const [rememberUser, setrememberUser] = useState(false);
-  const dispatch = useDispatch()
-    const navigate =useNavigate()
+  const [genderUser,setGenderUser] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
     remember: rememberUser,
+    gender:genderUser
   });
+  
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     const displayName = user.username;
     const email = user.email;
     const password = user.password;
-    createUser(email, password, navigate, displayName, dispatch);
-    console.log(email, password, displayName);
+    const gender = genderUser;
+    const remember = rememberUser;
+    createUser(email, password,remember,gender, navigate, displayName, dispatch);
+    console.log(email, password,remember,gender)
   };
+  useEffect(()=>{
+console.log(genderUser)
+  },[genderUser])
 
   return (
     <div>
@@ -56,7 +64,7 @@ const SingUp = () => {
             component="form"
             noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 1 ,mx:6,}}
+            sx={{mx: 6 }}
           >
             <TextField
               margin="normal"
@@ -78,7 +86,6 @@ const SingUp = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
@@ -94,6 +101,31 @@ const SingUp = () => {
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
+            
+            <FormControl sx={{border:"1px solid #bebebe",display:"flex",borderRadius:"3px"}}>
+              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+                row={true}
+              >
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                //   checked={gender ==='female'}
+                  onChange={(e)=>setGenderUser(e.target.value)}
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                //   checked={gender ==='male'}
+                  onChange={(e)=>setGenderUser(e.target.value)}
+                />
+              </RadioGroup>
+            </FormControl>
             <FormControlLabel
               control={
                 <Checkbox

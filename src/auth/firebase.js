@@ -33,6 +33,8 @@ export const provider = new GoogleAuthProvider();
 export const createUser = async (
   email,
   password,
+  remember,
+  gender,
   navigate,
   displayName,
   dispatch
@@ -51,9 +53,11 @@ export const createUser = async (
       setUser({
         username: displayName,
         email: email,
+        remember:remember,
+        gender:gender
       })
     );
-    navigate("/login");
+    navigate("/home");
     toastSuccessNotify("Kayıt Başarılı...!");
   } catch (error) {
     toastErrorNotify(error.message);
@@ -103,7 +107,8 @@ export const signUpProvider = (navigate, dispatch) => {
           email: user.email,
         })
       );
-      navigate("/");
+      navigate("/home");
+      console.log(user)
       toastSuccessNotify("Giriş Başarılı...!");
       console.log(user.displayName);
     })
@@ -123,8 +128,7 @@ export const signUpProviderFaceBook = (navigate, dispatch) => {
           email: user.email,
         })
       );
-      navigate("/");
-
+      navigate("/home");
       toastSuccessNotify("Giriş Başarılı...!");
     })
     .catch((error) => {

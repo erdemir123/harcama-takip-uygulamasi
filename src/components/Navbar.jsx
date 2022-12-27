@@ -5,11 +5,15 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../auth/firebase";
+import woman from  "../helper/img/woman.png"
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  console.log(user);
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -20,15 +24,26 @@ const Navbar = () => {
                 HARCAMA TAKİP UYGULAMASI
               </Link>
             </Typography>
-            {user ? (
-              <div>
-                <p> {user.username}</p>
+            {user?.email ? (
+              <div className={styles.user}>
+                <img src={woman} alt="" className={styles.img}/>
+                <p className={styles.username}> {user.username}</p>
+                
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="x-small"
+                  onClick={() => logOut(navigate, dispatch)}
+                  className={styles.logOut}
+                >
+                  Log Out
+                </Button>
               </div>
             ) : (
               <div>
                 {" "}
                 <Button variant="outlined" color="inherit">
-                  <Link to="/login" component="button" className={styles.link}>
+                  <Link to="/" component="button" className={styles.link}>
                     GİRİŞ
                   </Link>
                 </Button>

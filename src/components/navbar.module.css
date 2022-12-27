@@ -3,3 +3,31 @@
     color:#fff;
     font-size:.8rem;
 }
+.user{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:1rem;
+}
+.img{
+    width:30px;
+    height:30px;
+}
+.username{
+    color:#ddd;
+    text-transform:uppercase;
+    font-weight:700;
+}
+@media (max-width:480px){
+    .username{
+        font-size:.6rem
+    }
+    .link{
+        font-size:.6rem
+    }
+    .img{
+        width:25px;
+        height:25px;
+    }
+    
+}

@@ -5,6 +5,8 @@ export const initialState = {
     displayName: "",
     email: "",
     pasword: "",
+    remember:false,
+    gender:""
   },
 };
 

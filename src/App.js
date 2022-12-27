@@ -23,8 +23,8 @@ function App() {
       <Navbar />
       <Container>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/singUp" element={<SingUp />} />
       </Routes>
       </Container>

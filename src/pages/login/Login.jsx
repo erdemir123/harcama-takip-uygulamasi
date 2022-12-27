@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.module.css";
+import styles from "./login.module.css";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { signIn } from "../../auth/firebase";
+import { signIn, signUpProvider } from "../../auth/firebase";
 
 const Login = () => {
     const [rememberUser,setrememberUser]=useState(true)
@@ -30,6 +30,10 @@ const Login = () => {
       );
       
   };
+  const handleGoogle = (e)=>{
+    e.preventDefault()
+    signUpProvider(navigate,dispatch)
+  }
   return (
     <div>
       <Grid item xs={12} sm={8} md={5} component={Paper}>
@@ -93,14 +97,23 @@ const Login = () => {
             >
               LOGİN
             </Button>
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              sx={{ mb: 2 }}
+              onClick={handleGoogle}
+            >
+              Sign in with Google
+            </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/login">
+                <Link to="/login" className={styles.link}>
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/singUp">
+                <Link to="/singUp"  className={styles.link}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
