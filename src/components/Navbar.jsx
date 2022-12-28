@@ -32,7 +32,7 @@ const Navbar = () => {
                 <Button
                   variant="outlined"
                   color="inherit"
-                  size="x-small"
+                  size="small"
                   onClick={() => logOut(navigate, dispatch)}
                   className={styles.logOut}
                 >
