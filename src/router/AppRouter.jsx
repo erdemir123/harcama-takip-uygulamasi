@@ -21,7 +21,7 @@ const AppRouter = () => {
       <Navbar />
       <Container>
         <Routes>
-          <Route index element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/singUp" element={<SingUp />} />
           <Route path="/" element={<PrivateRouter />}>
              <Route path="/home" element={<Home />} />
