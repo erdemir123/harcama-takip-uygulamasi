@@ -6,32 +6,35 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeSpend } from "../features/spendSlice";
 
 const Liste = () => {
   const { spend } = useSelector((state) => state.spend);
   const dispatch = useDispatch();
-  const handleClear = (id) => {
-    dispatch(removeSpend(id));
-    console.log(id);
+  const handleClear = (item) => {
+    dispatch(removeSpend(item.spendId));
+    
   };
+  useEffect(()=>{
+    localStorage.setItem("spend",JSON.stringify(spend))
+},[spend])
   return (
     <List>
       {spend.map((item) => (
-        <React.Fragment key={item.id}>
+        <div key={item.spendId}>
           <ListItem
             secondaryAction={
               <IconButton edge="end" aria-label="delete">
-                <DeleteIcon onClick={() => handleClear(item.spendId)} />
+                <DeleteIcon onClick={() => handleClear(item)} />
               </IconButton>
             }
           >
             <ListItemText primary={item.baslik} secondary={item.miktar} />
           </ListItem>
           <Divider />
-        </React.Fragment>
+        </div>
       ))}
     </List>
   );

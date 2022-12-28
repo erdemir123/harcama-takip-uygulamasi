@@ -1,8 +1,8 @@
 import { Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSpend } from "../features/spendSlice";
-import { toastWarnNotify } from "../helper/Toastfy";
+import { toastSuccessNotify, toastWarnNotify } from "../helper/Toastfy";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const Form = () => {
     setSpendId(Math.floor(Math.random()*10000))
     if(baslik && miktar){
         dispatch(addSpend({ baslik, miktar,spendId }))
+        toastSuccessNotify("Harcama Bilgisi Eklendi")
     }
     else{
         if(!baslik){
@@ -29,7 +30,9 @@ const Form = () => {
     setBaslik("")
     setMiktar("")
   };
-  console.log(spend);
+  useEffect(()=>{
+    localStorage.setItem("spend",JSON.stringify(spend))
+},[spend])
   return (
     <form noValidate autoComplete="off" onSubmit={handleSubmit} sx={{ mt: 4 }}>
       <Typography variant="h6" color="darkslateblue">
@@ -50,7 +53,7 @@ const Form = () => {
         required
         onChange={(e) => setMiktar(e.target.value)}
         value={miktar}
-        sx={{ my: 5 }}
+        sx={{ my:2 }}
       />
       <Button variant="contained" color="secondary" type="submit">
         EKLE

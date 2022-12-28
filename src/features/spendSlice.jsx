@@ -10,17 +10,11 @@ const spendSlice = createSlice({
   name: "spend",
   initialState,
   reducers: {
-    addSpend: (state = initialState, { payload }) => {
-      state.spend = [
-        ... state.spend.filter((item) => item.spendId !== payload.spendId),
-        payload,
-      ];
-      localStorage.setItem("spend", JSON.stringify(state.spend));
+    addSpend: (state, { payload }) => {
+      state.spend = [...state.spend, payload];
     },
-    removeSpend: (state = initialState, { payload }) => {
-      state.spend = [state.spend.filter((item) => item.spendId !== payload)];
-
-    //   localStorage.setItem("spend", JSON.stringify(state.spend));
+    removeSpend: (state, { payload }) => {
+    state.spend  = [...(state.spend.filter((item)=>item.spendId !== payload))];
     },
   },
 });
