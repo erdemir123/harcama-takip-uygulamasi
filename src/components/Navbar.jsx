@@ -10,10 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../auth/firebase";
 import woman from  "../helper/img/woman.png"
 const Navbar = () => {
-  const { user } = useSelector((state) => state.auth);
+  const {user}  = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user);
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>

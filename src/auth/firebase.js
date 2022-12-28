@@ -84,12 +84,12 @@ export const logOut = (navigate, dispatch) => {
   signOut(auth);
   dispatch(clearUser());
   toastWarnNotify("Çıkış Yapıldı..");
-  navigate("/");
+  navigate("/login");
 };
 export const signIn = async (email, password, navigate) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    navigate("/");
+    navigate("/home");
     toastSuccessNotify("Giriş Başarılı...!");
   } catch (error) {
     toastErrorNotify(error.message);

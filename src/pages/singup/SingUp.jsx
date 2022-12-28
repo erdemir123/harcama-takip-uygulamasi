@@ -1,5 +1,5 @@
 import "./singUp.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./singUp.module.css";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -11,8 +11,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { Link, useNavigate } from "react-router-dom";
-import { createUser, signIn } from "../../auth/firebase";
+import {  useNavigate } from "react-router-dom";
+import { createUser } from "../../auth/firebase";
 import { useDispatch } from "react-redux";
 import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
 const SingUp = () => {
@@ -38,11 +38,7 @@ const SingUp = () => {
     createUser(email, password,remember,gender, navigate, displayName, dispatch);
     console.log(email, password,remember,gender)
   };
-  useEffect(()=>{
-console.log(genderUser)
-  },[genderUser])
-
-  return (
+    return (
     <div>
       <Grid item xs={12} sm={8} md={5} component={Paper}>
         <Box
@@ -102,7 +98,7 @@ console.log(genderUser)
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
             
-            <FormControl sx={{border:"1px solid #bebebe",display:"flex",borderRadius:"3px"}}>
+            <FormControl sx={{border:"1px solid #bebebe",display:"flex",borderRadius:"3px",margin: "8px  0"}}>
               <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
